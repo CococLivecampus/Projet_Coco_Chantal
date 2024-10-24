@@ -3,26 +3,27 @@ pipeline {
   stages {
     stage('Clonage du dépôt GitHub') {
       steps {
-        git branch: ‘main’, url :
-'https://github.com/CococLivecampus/Projet_Coco_Chantal/OSDetector.git'
-}
-}
-tage ('Installation de Python et pip') {
-            steps {
-                // Installer Python 3.11
-                sh '''
-                sudo apt update
-                sudo apt install -y software-properties-common
-                sudo add-apt-repository ppa:deadsnakes/ppa -y
-                sudo apt update
-                sudo apt install -y python3.11 python3.11-distutils
-                curl -sS https://bootstrap.pypa.io/get-pip.py | sudo python3.11
-                '''
-            }
+        git branch: ‘main’, url : 'https://github.com/CococLivecampus/Projet_Coco_Chantal/OSDetector.git'
+    }
+    }
+  }
+    stage ('Installation de Python et pip') {
+        steps {
+            // Installation Python 3.11
+            sh '''
+            sudo apt update
+            sudo apt install -y software-properties-common
+            sudo add-apt-repository ppa:deadsnakes/ppa -y
+            sudo apt update
+            sudo apt install -y python3.11 python3.11-distutils
+            curl -sS https://bootstrap.pypa.io/get-pip.py | sudo python3.11
+            '''
         }
-
-        // Étape 3 : Exécution du script Python
-        stage('Exécution du script Python') {
-            steps {
-                sh 'python3.11 os_detector.py'
-            }
+    }
+    //execution du script python
+    stage('Exécution du script Python') {
+        steps {
+            sh 'python3.11 os_detector.py'
+        }
+    }
+}
